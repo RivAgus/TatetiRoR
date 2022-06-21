@@ -3,7 +3,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :games, only: [:index, :show, :create, :update]
-  resources :players, only: [:index, :show, :create]
+  resources :players
+  resources :games
+
+  post '/players', to: 'players#create'
+  get '/players', to: 'players#index'
+  get '/players/:id', to: 'players#show'
+  post '/games', to: 'games#create'
+  put '/games/:id/join', to: 'games#join'
+  get '/games/:id', to: 'games#show'
+  put '/games/:id', to:'games#update'
 
 end

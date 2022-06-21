@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
     before_action :set_player, only: [:show]
+    before_action :check_token, except: [:create]
 
     def index
         @player = Player.all
@@ -17,7 +18,7 @@ class PlayersController < ApplicationController
     
 private
     def params_player
-        params.permit(:name, :is_x)
+        params.require(:player).permit(:name)
     end
 
     def render_response
