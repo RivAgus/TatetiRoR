@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
-    before_action :set_player, only: [:show]
-    before_action :check_token, except: [:create, :index]
+    before_action :set_player, only: [:show, :getname]
+    before_action :check_token, except: [:create, :index, :getname]
 
     def index #GET /players
         @player = Player.all
@@ -14,6 +14,10 @@ class PlayersController < ApplicationController
 
     def show #GET /players/:id
         render status: 200, json: {player: @player}
+    end
+
+    def getname #GET /players/:id/name
+        render status: 200, json: {player: @player.name}
     end
     
 private
