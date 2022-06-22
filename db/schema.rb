@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_214121) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

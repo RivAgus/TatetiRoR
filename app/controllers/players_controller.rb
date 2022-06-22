@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
     before_action :set_player, only: [:show]
-    before_action :check_token, except: [:create]
+    before_action :check_token, except: [:create, :index]
 
     def index
         @player = Player.all
@@ -25,7 +25,7 @@ private
         if @player.save
             render status: 200, json: {player: @player}
         else 
-            reder status: 400, json: {message: @player.errors.details}
+            render status: 400, json: {message: @player.errors.details}
         end
     end
 

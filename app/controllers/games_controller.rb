@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  
+  before_action :check_token
   before_action :set_game, only: [:show, :join, :update]
   
   def create #POST /games/
@@ -16,17 +16,18 @@ class GamesController < ApplicationController
     end
   end
 
+
   def show #GET /games/:id
     render status: 200, json: {game: @game}
   end
 
-  def update #PUT/games
+  def update #PUT/games/:id
     if params[:played]
       set_tile_played
       @game.assign_attributes(is_turn: @game.is_turn == 2 ? 1 : 2, winner: params[:winner])
       render_response
-    else
-      check_moves_left
+    # elsif 
+    #   @game.
     end
   
   end
@@ -53,15 +54,26 @@ private
     if @is_turn == 1
       @game.board[params[:played]] = "X"
       @game.board_moves = @game.board_moves - 1
+      check_moves_left
     else
       @game.board[params[:played]] = "O"
       @game.board_moves = @game.board_moves - 1
+      check_moves_left
     end
   end
   def check_moves_left
     if(@game.board_moves == 0 && @game.winner.nil?)
       @game.assign_attributes(game_state: "Finished")
       render_response
+    else
+      false
     end
   end
+
+  def check_token
+		@player = (Player.find_by(id: params[:player1_id]) || Player.find_by(id: params[:player2_id]))
+    return if request.headers["Authorization"] == "Bearer #{@player.token}"
+			render status: 401, json:{message: "Wrong token"}
+			false
+	end
 end
