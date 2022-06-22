@@ -24,10 +24,15 @@ class GamesController < ApplicationController
   def update #PUT/games/:id
     if params[:played]
       set_tile_played
-      @game.assign_attributes(is_turn: @game.is_turn == 2 ? 1 : 2, winner: params[:winner])
+      @game.assign_attributes(is_turn: @game.is_turn == 2 ? 1 : 2)
       render_response
-    # elsif 
-    #   @game.
+    elsif params[:winner]
+      @game.assign_attributes(winner: params[:winner], game_state: "Finished")
+      render_response
+    else
+      if(!check_moves_left) 
+        @game.assign_attributes(game_state: "It's a tie", winner: "None")
+      end
     end
   
   end

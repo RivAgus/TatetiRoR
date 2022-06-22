@@ -2,17 +2,17 @@ class PlayersController < ApplicationController
     before_action :set_player, only: [:show]
     before_action :check_token, except: [:create, :index]
 
-    def index
+    def index #GET /players
         @player = Player.all
         render json: @player
     end
 
-    def create
+    def create #POST /players
         @player = Player.new(params_player)
         render_response
     end
 
-    def show
+    def show #GET /players/:id
         render status: 200, json: {player: @player}
     end
     
