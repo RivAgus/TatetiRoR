@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get '/players/:id/name', to:'players#getname'
   post '/games', to: 'games#create'
   put '/games/:id/join', to: 'games#join'
-  get '/games/:id', to: 'games#show'
+  get '/games/:id/:player1_id', to: 'games#check'
+  get '/games/:id/', to: 'games#show'
   put '/games/:id', to:'games#update'
 
 end

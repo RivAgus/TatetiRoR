@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :check_token
-  before_action :set_game, only: [:show, :join, :update]
+  before_action :set_game, only: [:show, :join, :update, :check]
   
   def create #POST /games/
     @game = Game.new(game_state: "Waiting for player 2", player1_id: params[:player1_id], board_moves: 9)
@@ -18,6 +18,10 @@ class GamesController < ApplicationController
 
 
   def show #GET /games/:id
+    render status: 200, json: {game: @game}
+  end
+
+  def check #GET /games/:id/:player1_id
     render status: 200, json: {game: @game}
   end
 
@@ -39,7 +43,7 @@ class GamesController < ApplicationController
 
 private
   def game_params
-    params.require(:game).permit(:player1_id, :player2_id, :game_state, :played, :winner)
+    params.require(:game).permit(:id,:player1_id, :player2_id, :game_state, :played, :winner)
   end
   def set_game
     @game = Game.find_by(id: params[:id])
@@ -76,6 +80,7 @@ private
   end
 
   def check_token
+    debugger
 		@player = (Player.find_by(id: params[:player1_id]) || Player.find_by(id: params[:player2_id]))
     return if request.headers["Authorization"] == "Bearer #{@player.token}"
 			render status: 401, json:{message: "Wrong token"}
