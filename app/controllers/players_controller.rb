@@ -1,6 +1,5 @@
 class PlayersController < ApplicationController
     before_action :set_player, only: [:show, :getname]
-    before_action :check_token, except: [:create, :index, :getname]
 
     def index #GET /players
         @player = Player.all
@@ -41,9 +40,4 @@ private
         end
     end
 
-    def check_token
-		return if request.headers["Authorization"] == "Bearer #{@player.token}"
-			render status: 401, json:{message: "Wrong token"}
-			false
-	end
 end
