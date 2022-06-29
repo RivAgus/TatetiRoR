@@ -1,24 +1,44 @@
-# README
+# TICTACTTOE BACKEND - Advanced programming (programación avanzada)
+![RubyOnRails](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
+## API documentation
+### MODELS
+Player
+Game
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### ALL ENDPOINTS
+post '/players'
+get '/players'
+get '/players/:id'
+get '/players/:id/name'
+post '/games' 
+put '/games/:id/join'
+get '/games/:id' 
+put '/games/:id' 
 
-Things you may want to cover:
+### PLAYERS ENDPOINTS
 
-* Ruby version
+#### post '/players'
+Create a player
 
-* System dependencies
+#### get '/players'
+Get all the players
 
-* Configuration
+#### get '/players/:id'
+Show a player information (token included)
 
-* Database creation
+#### get '/players/:id/name'
+Show the players name (useful when you don't want to access this players token)
 
-* Database initialization
+### GAMES ENDPOINTS
 
-* How to run the test suite
+#### post '/games' 
+Creates a game
 
-* Services (job queues, cache servers, search engines, etc.)
+#### put '/games/:id/join'
+Join a game
 
-* Deployment instructions
+#### get '/games/:id' 
+Show all the data from a game. 
 
-* ...
+#### put '/games/:id' 
+Updates a game. Useful when you want to set plays a player did.

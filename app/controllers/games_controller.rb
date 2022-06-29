@@ -31,7 +31,7 @@ class GamesController < ApplicationController
       render_response
     else
       if(!check_moves_left) 
-        @game.assign_attributes(game_state: "It's a tie", winner: "None")
+        @game.assign_attributes(game_state: "Tie", winner: "None")
       end
     end
   
