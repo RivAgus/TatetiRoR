@@ -6,27 +6,27 @@
 
 ### MODELS
 
-Player
+- Player
 
-Game
+- Game
 
 ### ALL ENDPOINTS
 
-post '/players'
+-post '/players'
 
-get '/players'
+- get '/players'
 
-get '/players/:id'
+- get '/players/:id'
 
-get '/players/:id/name'
+- get '/players/:id/name'
 
-post '/games' 
+- post '/games' 
 
-put '/games/:id/join'
+- put '/games/:id/join'
 
-get '/games/:id' 
+- get '/games/:id' 
 
-put '/games/:id' 
+- put '/games/:id' 
 
 
 ### PLAYERS ENDPOINTS
