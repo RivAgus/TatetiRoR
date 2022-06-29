@@ -12,7 +12,7 @@
 
 ### ALL ENDPOINTS
 
--post '/players'
+- post '/players'
 
 - get '/players'
 
